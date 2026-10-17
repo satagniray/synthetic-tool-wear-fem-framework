@@ -1,0 +1,75 @@
+# ---------------------------------------------------------------------------
+# Synthetic multi-cycle tool-wear demo - default configuration
+#
+# ALL VALUES ARE PUBLIC, ILLUSTRATIVE, SYNTHETIC DEMONSTRATION VALUES.
+# None of them comes from experiments, calibration, or unpublished research.
+# Units are given in the key names (mm, um, deg, K, MPa, m/min, s).
+# ---------------------------------------------------------------------------
+
+project:
+  name: synthetic_tool_wear_demo
+  seed: 42                         # seeds the synthetic noise -> deterministic runs
+
+geometry:                          # generic 2D orthogonal-cutting insert section
+  rake_angle_deg: 8.0
+  clearance_angle_deg: 6.0
+  edge_radius_mm: 0.025
+  width_mm: 0.8                    # extent along the flank (cutting direction)
+  height_mm: 1.2                   # extent along the rake face
+  back_split: 0.5                  # where mesh lines meet the clamped back faces (0..1)
+
+mesh:                              # structured quadrilateral mesh
+  n_flank: 30                      # elements along the flank face
+  n_edge: 8                        # elements around the rounded cutting edge
+  n_rake: 40                       # elements along the rake face
+  n_depth: 30                      # element layers from the wear surface into the body
+  surface_growth: 1.08             # geometric growth of element length away from the edge
+  depth_exponent: 1.6              # > 1 clusters layers towards the wear surface
+
+synthetic_fields:                  # smooth analytical stand-ins for FEM contact output
+  ambient_temperature_K: 293.15
+  peak_temperature_K: 1100
+  max_contact_pressure_MPa: 1200
+  cutting_speed_m_per_min: 120
+  noise_fraction: 0.02             # seeded multiplicative noise on pressure/temperature
+  chip_speed_ratio: 0.45           # chip sliding speed / cutting speed on the rake face
+  rake_contact_length_mm: 0.30     # tool-chip contact length
+  pressure_center_mm: 0.01         # pressure peak position (signed distance from edge)
+  pressure_width_rake_mm: 0.12
+  pressure_width_flank_mm: 0.03
+  temperature_center_mm: 0.10      # temperature peak sits on the rake face (crater zone)
+  temperature_width_mm: 0.14
+  sticking_length_mm: 0.04         # sliding speed rises from zero at the stagnation point
+  flank_sliding_transition_mm: 0.01
+  flank_pressure_ratio: 0.55       # flank-land pressure / peak pressure
+  flank_temperature_ratio: 0.80    # flank-land heating relative to the rake peak
+  flank_contact_gap_um: 2.0        # elastic-recovery gap that defines flank contact
+
+wear:
+  model: usui_demo                 # usui_demo | usui_published (see docs/methodology.md)
+  flank_direction: cutting_normal  # cutting_normal | surface_normal
+  time_step_mode: auto_scaled      # auto_scaled | fixed
+  delta_t_s: 60.0                  # only used when time_step_mode = fixed
+  target_max_surface_displacement_um: 4.0   # numerical step control, NOT calibration
+  target_flank_wear_mm: 0.25       # stopping criterion on the flank-wear indicator
+  max_cycles: 20
+  vb_threshold_um: 0.5             # recession that counts as "worn" for the indicator
+  depth_smoothing_passes: 2        # [1,2,1]/4 filter on the wear increment along the contour
+
+smoothing:
+  method: normalized_radial        # normalized_radial | laplacian
+  radius_mm: 0.08
+  laplacian_iterations: 400
+  redistribute_surface_nodes: true # slide contour nodes back to their original spacing
+
+quality:
+  max_retries: 6
+  retry_scale: 0.5
+  min_scaled_jacobian: 0.05
+
+output:
+  directory: results
+  save_csv: true
+  save_png: true
+  save_html: true
+  zoom_window_mm: 0.30

@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tool-wear-demo"
+version = "1.0.0"
+description = "Synthetic multi-cycle tool-wear simulation framework: a solver-free portfolio demonstrator of an automated FEM-style wear loop for orthogonal cutting."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Satagni Ray" }]
+keywords = ["tool wear", "machining", "orthogonal cutting", "finite element", "simulation", "CAE", "Usui wear model"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "numpy>=1.24",
+    "matplotlib>=3.6",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+tool-wear-demo = "tool_wear_demo.cli:main"
+
+[project.urls]
+Repository = "https://github.com/satagniray/synthetic-tool-wear-fem-framework"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-m 'not abaqus'"
+markers = [
+    "abaqus: tests that need a licensed Abaqus installation (skipped by default and never run in public CI)",
+]

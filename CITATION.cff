@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "If you refer to this demonstrator, please cite it as below."
+title: "Synthetic Multi-Cycle Tool-Wear Simulation Framework"
+abstract: >-
+  A solver-free Python demonstrator of an automated, cycle-by-cycle tool-wear
+  loop for 2D orthogonal cutting: synthetic process fields, a Usui-type wear law,
+  node-based geometry update, interior mesh smoothing and mesh-quality control.
+  All inputs and outputs are synthetic; the project is not experimentally validated.
+type: software
+authors:
+  - family-names: Ray
+    given-names: Satagni
+version: 1.0.0
+date-released: 2026-10-11
+license: MIT
+repository-code: "https://github.com/satagniray/synthetic-tool-wear-fem-framework"
+keywords:
+  - tool wear
+  - machining
+  - orthogonal cutting
+  - finite element method
+  - simulation
+references:
+  - type: article
+    title: "2D FEM estimate of tool wear in turning operation"
+    authors:
+      - family-names: Xie
+        given-names: L.-J.
+      - family-names: Schmidt
+        given-names: J.
+      - family-names: Schmidt
+        given-names: C.
+      - family-names: Biesinger
+        given-names: F.
+    journal: "Wear"
+    volume: 258
+    start: 1479
+    end: 1490
+    year: 2005

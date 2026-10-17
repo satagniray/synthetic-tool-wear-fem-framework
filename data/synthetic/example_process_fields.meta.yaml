@@ -1,0 +1,15 @@
+source: synthetic
+seed: 42
+purpose: portfolio demonstration
+not_for_physical_validation: true
+generated_by: python -m tool_wear_demo.cli generate-demo-data
+config: built-in defaults
+units:
+  s_norm: '-'
+  d_mm: mm (signed distance from edge middle, flank < 0 < rake)
+  x_mm: mm
+  y_mm: mm
+  contact_pressure_MPa: MPa
+  temperature_K: K
+  sliding_velocity_m_s: m/s
+  wear_rate_um_per_min: 'um/min (wear model: usui_demo)'

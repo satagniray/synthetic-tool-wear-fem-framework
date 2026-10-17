@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Simulation output (regenerate with the CLI)
+results/*
+!results/.gitkeep
+
+# Solver files must never be committed to this public repository
+*.odb
+*.inp
+*.lck
+*.sta
+*.msg
+*.dat
+*.res
+*.prt
+*.sim
+*.com
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

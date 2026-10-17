@@ -1,0 +1,24 @@
+# Fast demo / CI configuration: coarser mesh, fewer cycles, larger steps.
+# Every value is synthetic and for demonstration only.
+# Keys that are not listed fall back to the defaults (see config/default.yaml).
+
+project:
+  name: synthetic_tool_wear_demo_fast
+  seed: 7
+
+mesh:
+  n_flank: 14
+  n_edge: 6
+  n_rake: 18
+  n_depth: 12
+  surface_growth: 1.15
+  depth_exponent: 1.5
+
+wear:
+  target_max_surface_displacement_um: 5.0
+  target_flank_wear_mm: 0.08
+  max_cycles: 6
+
+output:
+  save_png: true
+  save_html: true
